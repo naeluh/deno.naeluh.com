@@ -33,7 +33,6 @@ export const handler: Handlers<Api | null> = {
     if (!resp) {
       return ctx.render(null);
     }
-    console.log(resp[0]);
     const post = resp[0];
     const data: Api = {
       post,
