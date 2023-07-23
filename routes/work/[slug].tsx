@@ -2,7 +2,6 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { getPost, getPosts } from "../../lib/api.ts";
 import { render } from "$gfm";
-import App from "../../components/App/App.tsx";
 import PostList from "../../components/PostList/PostList.tsx";
 
 interface Page {
@@ -54,46 +53,44 @@ export default function Page({ data, title }: {
     return <h1>Page not found</h1>;
   }
   return (
-    <App>
-      <section>
-        <Head>
-          <title>{data.post.Title}</title>
-          <meta name="title" content={data.post.Title} />
-          <meta name="description" content={data.post.Description} />
-        </Head>
+    <section>
+      <Head>
+        <title>{data.post.Title}</title>
+        <meta name="title" content={data.post.Title} />
+        <meta name="description" content={data.post.Description} />
+      </Head>
 
-        <div key={data.post._id}>
-          <h1>{data.post.Title}</h1>
-          {data.post?.Image?.url && (
-            <div className={"imgInnerContainer"}>
-              <img
-                className={"imgContainer"}
-                src={`https://strapi.hulea.org/${data?.post?.Image?.url}`}
-                alt={data.post.Title}
-              />
-            </div>
-          )}
-          <div className={"innerContentContainer"}>
-            {data.post.Description && (
-              <div
-                class="mt-8 markdown-body"
-                dangerouslySetInnerHTML={{
-                  __html: render(data.post.Description),
-                }}
-              />
-            )}
-            <a className="dash-link" target="_blank" href={data.post.Link}>
-              go to website {`>`}
-            </a>
-            {" "}
+      <div key={data.post._id}>
+        <h1>{data.post.Title}</h1>
+        {data.post?.Image?.url && (
+          <div className={"imgInnerContainer"}>
+            <img
+              className={"imgContainer"}
+              src={`https://strapi.hulea.org/${data?.post?.Image?.url}`}
+              alt={data.post.Title}
+            />
           </div>
+        )}
+        <div className={"innerContentContainer"}>
+          {data.post.Description && (
+            <div
+              class="mt-8 markdown-body"
+              dangerouslySetInnerHTML={{
+                __html: render(data.post.Description),
+              }}
+            />
+          )}
+          <a className="dash-link" target="_blank" href={data.post.Link}>
+            go to website {`>`}
+          </a>
+          {" "}
         </div>
-        <PostList
-          data={data.posts}
-          title={data.post.Title || ""}
-          preview={true}
-        />
-      </section>
-    </App>
+      </div>
+      <PostList
+        data={data.posts}
+        title={data.post.Title || ""}
+        preview={true}
+      />
+    </section>
   );
 }

@@ -78,3 +78,33 @@ export async function getPost(Slug: string) {
   );
   return data?.webs;
 }
+
+export async function getPage(page) {
+  const data = await fetchAPI(
+    `
+  query PageByArg($where: JSON) {
+    basics(where: { URL: $where }, limit: 1) {
+      Title
+      _id
+      Image {
+        url
+        ext
+        provider
+        size
+      }
+      Body
+      URL
+      createdAt
+      updatedAt
+    }
+  }
+`,
+    {
+      variables: {
+        where: page,
+      },
+    },
+  );
+
+  return data?.basics[0];
+}

@@ -1,9 +1,3 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
-import { getPosts } from "../../lib/api.ts";
-import { render } from "$gfm";
-import App from "../../components/App/App.tsx";
-import { h } from "preact";
 import Card from "../Card/Card.tsx";
 
 import type { ComponentChildren } from "preact";

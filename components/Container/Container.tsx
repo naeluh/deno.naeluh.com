@@ -1,12 +1,10 @@
 import { h } from "preact";
-
 import type { ComponentChildren } from "preact";
-
 type Props = {
   children: ComponentChildren;
 };
 
-const App = (props: Props) => (
+const Container = (props: Props) => (
   <>
     <a className={"skipNavigationLink"} href="#main-content">
       Skip to Main Content
@@ -15,4 +13,4 @@ const App = (props: Props) => (
   </>
 );
 
-export default App;
+export default Container;

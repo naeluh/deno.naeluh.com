@@ -1,9 +1,7 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { Handlers } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { getPost, getPosts } from "../lib/api.ts";
-import App from "../components/App/App.tsx";
 import PostList from "../components/PostList/PostList.tsx";
-
 interface Page {
   _id: string;
   Title: string;
@@ -52,7 +50,7 @@ export default function Page({ data }: {
     return <h1>Page not found</h1>;
   }
   return (
-    <App>
+    <>
       <Head>
         <title>Work</title>
         <meta name="title" content="Nick Hulea's Work and Projects" />
@@ -64,6 +62,6 @@ export default function Page({ data }: {
         title={data.post.Title || ""}
         preview={true}
       />
-    </App>
+    </>
   );
 }

@@ -1,5 +1,3 @@
-import { PageProps } from "$fresh/server.ts";
-
 interface Page {
   _id: string;
   Title: string;
