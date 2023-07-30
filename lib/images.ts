@@ -15,20 +15,20 @@ const downloadImage = async (url: string, filename: string) => {
   if (rdr) {
     const r = readerFromStreamReader(rdr);
 
-    const f = await Deno.open(`./static/${filename}`, {
+    const f = await Deno.open(`./static/images/${filename}`, {
       create: true,
       write: true,
     });
     await copy(r, f);
     f.close();
 
-    const data: Uint8Array = await Deno.readFile(`./static/${filename}`);
+    const data: Uint8Array = await Deno.readFile(`./static/images/${filename}`);
     await ImageMagick.read(data, async (img: IMagickImage) => {
       await img.write(
         MagickFormat.Webp,
         (data: Uint8Array) => {
-          Deno.writeFile(`./static/${filename}.webp`, data);
-          console.log(`./static/${filename}.webp saved!!!`);
+          Deno.writeFile(`./static/images/${filename}.webp`, data);
+          console.log(`./static/images/${filename}.webp saved!!!`);
           return;
         },
       );
@@ -37,9 +37,10 @@ const downloadImage = async (url: string, filename: string) => {
   return true;
 };
 
+let done = 1;
+
 export const getImages = async () => {
   const posts = await getPosts();
-
   return posts.map(async ({ Image }: {
     Image: {
       url: string;
@@ -52,3 +53,5 @@ export const getImages = async () => {
     );
   });
 };
+
+getImages();

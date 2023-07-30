@@ -1,7 +1,8 @@
 {
   "lock": false,
   "tasks": {
-    "start": "deno run -A --watch=static/,routes/ dev.ts",
+    "images": "deno run -A ./lib/images.ts",
+    "start": "deno task images && deno run -A --watch=static/,routes/ dev.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "lint": {
